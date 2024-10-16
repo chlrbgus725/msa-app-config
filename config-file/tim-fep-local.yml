@@ -18,6 +18,12 @@ spring:
       auto-offset-reset: earliest
     template:
       default-topic: tim-topic
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:28080/eureka/
 management:
   endpoints:
     web:
