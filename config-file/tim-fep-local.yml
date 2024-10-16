@@ -18,7 +18,17 @@ spring:
       auto-offset-reset: earliest
     template:
       default-topic: tim-topic
-
+management:
+  endpoints:
+    web:
+      base-path: /management 
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
 server:
   port: 28080
 
