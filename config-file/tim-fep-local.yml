@@ -1,0 +1,58 @@
+# local
+spring:
+  application:
+    name: tim-fep
+  messages:
+    basename: message/message-common
+    encoding: UTF-8
+    fallbackToSystemLocale: false
+    alwaysUseMessageFormat: true
+  kafka:
+    producer:
+      bootstrap-servers: 127.0.0.1:19092  
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: 127.0.0.1:19092
+      group-id: tim-group
+      auto-offset-reset: earliest
+    template:
+      default-topic: tim-topic
+
+server:
+  port: 28080
+
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  file:
+    name: C://FETHER//logs//tim-fep.log
+    encoding: UTF-8
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 100MB
+  level:
+    reactor:
+      netty:
+       channel: WARN
+    kr:
+      co: 
+         fether: DEBUG
+    org:
+      apache:
+         kafka: WARN
+      hibernate:
+         SQL: DEBUG
+         orm:
+           jdbc:
+           bind: TRACE
+    jdbc:
+      resultset: WARN
+      audit: WARN
+      resultsettable: WARN
+      sqltiming: DEBUG
+      sqlonly: WARN
+      sql: DEBUG
+      connection: WARN             
