@@ -1,0 +1,105 @@
+# local
+spring:
+  application:
+    name: tim-admin
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: fether
+    password: fether
+    url: 'jdbc:h2:tcp://localhost:9092/~/fether_tim'
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show-sql: true
+        "[format_sql]": true
+        "[use_sql_comment]": true
+        "[hightlight_sql]": true
+  sql:
+    init:
+      data-locations: classpath*:kr/co/fether/tim/admin/setting/db/sql/import.sql
+      mode: always
+      continue-on-error: true
+      platform: h2
+  kafka:
+    producer:
+      bootstrap-servers: 127.0.0.1:19092  
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: 127.0.0.1:19092
+      group-id: tim-group
+      auto-offset-reset: earliest
+    template:
+      default-topic: tim-topic
+  messages:
+      basename: message/message-common
+      encoding: UTF-8
+      fallbackToSystemLocale: false
+      alwaysUseMessageFormat: true
+      
+springdoc:
+  swagger-ui:
+    groups-order: DESC
+    tags-sorter: alpha
+    operations-sorter: method
+    disable-swagger-default-url: true
+    display-request-duration: true
+    defaultModelsExpandDepth: 2
+    defaultModelExpandDepth: 2
+  api-docs:
+    path: /api-docs
+  show-actuator: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  writer-with-default-pretty-printer: true
+  model-and-view-allowed: true
+  paths-to-match:
+    - /api/v1/**
+
+server:
+  port: 38080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force-response: true
+
+jwt:
+  expiration_time: 86400000 #1일
+  secret: dGltYWRtaW5qd3RzZWNyZXRrZXl0aW1hZG1pbmp3dHNlY3JldGtleXRpbWFkbWluand0c2VjcmV0a2V5
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  file:
+    name: C://FETHER//logs//tim-admin.log
+    encoding: UTF-8
+  logback:
+    rollingpolicy:
+      max-history: 7
+      max-file-size: 100MB
+  level: 
+    kr:
+      co: 
+         fether: DEBUG
+    org:
+      apache:
+        kafka: WARN			
+      hibernate:
+        SQL: WARN
+        orm:
+          jdbc:
+            bind: WARN
+    jdbc:
+      resultset: WARN
+      audit: WARN
+      resultsettable: WARN
+      sqltiming: DEBUG
+      sqlonly: WARN
+      sql: DEBUG
+      connection: WARN
+  
