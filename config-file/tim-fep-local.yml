@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: tim-fep
+  cloud:
+    loadbalancer:
+      ribon:
+        enabled: false
   messages:
     basename: message/message-common
     encoding: UTF-8
