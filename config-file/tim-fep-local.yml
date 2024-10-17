@@ -1,4 +1,6 @@
 # local
+server:
+  port: 0
 spring:
   application:
     name: tim-fep
@@ -37,9 +39,6 @@ management:
       show-details: always
     shutdown:
       enabled: true
-server:
-  port: 0
-
 logging:
   pattern:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
