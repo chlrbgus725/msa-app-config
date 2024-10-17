@@ -19,6 +19,8 @@ spring:
     template:
       default-topic: tim-topic
 eureka:
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
   client:
     register-with-eureka: true
     fetch-registry: true
